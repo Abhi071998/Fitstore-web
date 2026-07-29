@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const BASE_URL = import.meta.env.FITSTORE_BASE_URL
+const BASE_URL = import.meta.env.VITE_BASE_URL
 export const fitstoreApi = createApi({
   reducerPath: 'fitstoreApi', // Unique key in the store to hold cached API data
   

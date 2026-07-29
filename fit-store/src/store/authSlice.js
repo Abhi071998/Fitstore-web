@@ -45,7 +45,6 @@ const authSlice = createSlice({
     },
   },
 });
-
 // Export actions so components can dispatch them: dispatch(setCredentials(...))
 export const { setCredentials, logout } = authSlice.actions;
 
