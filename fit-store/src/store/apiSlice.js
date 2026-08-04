@@ -22,7 +22,7 @@ export const fitstoreApi = createApi({
   }),
 
   // TAG TYPES: Used for automatic cache clearing (e.g. invalidating 'Products' after creating one)
-  tagTypes: ['Products', 'Orders'],
+  tagTypes: ['Products', 'Orders','Category'],
 
   // ENDPOINTS: Define your API routes here
   endpoints: (builder) => ({
@@ -41,10 +41,13 @@ export const fitstoreApi = createApi({
       query: () => '/products',
       providesTags: ['Products'],
     }),
+
+    // GET ALL CATEGORIES
+    getCategories: builder.query({
+      query: () => '/categories/getAllCategories',
+      providesTags: ['Category'],
+    }),
   }),
 });
 
-// AUTO-GENERATED HOOKS: RTK Query creates these automatically based on endpoint names!
-// - login endpoint       -> useLoginMutation
-// - getProducts endpoint  -> useGetProductsQuery
-export const { useLoginMutation, useGetProductsQuery } = fitstoreApi;
+export const { useLoginMutation, useGetProductsQuery ,useGetCategoriesQuery} = fitstoreApi;

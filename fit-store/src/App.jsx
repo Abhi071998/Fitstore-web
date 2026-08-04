@@ -2,6 +2,7 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 import Home from "./home/Home";
 import Navbar from "./common/components/Navbar";
 import Login from "./loginAuth/Login";
+import Categories from "./category/categories";
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        {/* <Route path="/products" element={<Products />} /> */}
+        <Route path="/categories" element={<Categories />} />
       </Routes>
     </BrowserRouter>
   );
