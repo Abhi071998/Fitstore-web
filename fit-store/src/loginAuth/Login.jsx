@@ -1,7 +1,7 @@
 import react, { useState } from "react";
 import { useLoginMutation } from "../store/apiSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { setCredentials } from "../store/authSlice";
+import { setCredentials, logout } from "../store/authSlice";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {

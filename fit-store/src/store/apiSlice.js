@@ -47,7 +47,22 @@ export const fitstoreApi = createApi({
       query: () => '/categories/getAllCategories',
       providesTags: ['Category'],
     }),
+
+    // CREATE CATEGORY
+    createCategory: builder.mutation({
+      query: (category) => ({
+        url: '/categories/createCategory',
+        method: 'POST',
+        body: category,
+      }),
+      invalidatesTags: ['Category'],
+    }),
   }),
 });
 
-export const { useLoginMutation, useGetProductsQuery ,useGetCategoriesQuery} = fitstoreApi;
+export const {
+  useLoginMutation,
+  useGetProductsQuery,
+  useGetCategoriesQuery,
+  useCreateCategoryMutation,
+} = fitstoreApi;

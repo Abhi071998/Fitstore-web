@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useGetCategoriesQuery } from '../store/apiSlice';
+import CreateCategoryModal from './CreateCategoryModal';
 import './CardGrid.css';
 
 export default function Categories() {
   const { data: categories, isLoading, isError, error } = useGetCategoriesQuery();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const getCategoryImage = (cat) => {
     if (cat.image_url) return cat.image_url;
@@ -55,6 +57,18 @@ export default function Categories() {
           );
         })}
       </div>
+
+      <button
+        className="fab-add-button"
+        aria-label="Add category"
+        onClick={() => setIsModalOpen(true)}
+      >
+        +
+      </button>
+
+      {isModalOpen && (
+        <CreateCategoryModal onClose={() => setIsModalOpen(false)} />
+      )}
     </div>
   );
 }
