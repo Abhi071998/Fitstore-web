@@ -1,0 +1,98 @@
+/* Container & Grid Layout */
+.card-grid-container {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.card-grid-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #1f2937;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* Base Card Styling */
+.item-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(39, 2, 2, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.item-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(19, 20, 20, 0.707);
+}
+
+/* Image Wrapper */
+.card-image-container {
+  width: 100%;
+  height: 180px;
+  background-color: #f9fafb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-no-image {
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+/* Content Area */
+.card-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  color: #111827;
+  text-transform: capitalize;
+}
+
+.card-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.card-price {
+  font-size: 16px;
+  font-weight: 700;
+  color: #059669;
+  margin: 0;
+}
+
+/* Global Status Message States */
+.grid-status {
+  padding: 24px;
+  font-size: 16px;
+}
+
+.grid-status.error {
+  color: #dc2626;
+}
