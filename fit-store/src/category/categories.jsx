@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useGetCategoriesQuery, useDeleteCategoryMutation } from '../store/apiSlice';
 import CategoryModal from './CategoryModal';
 import ConfirmDialog from './ConfirmDialog';
 import './CardGrid.css';
 
 export default function Categories() {
+  const navigate = useNavigate();
   const { data: categories, isLoading, isError, error } = useGetCategoriesQuery();
   // null = closed, 'create' = add mode, category object = edit mode
   const [modalMode, setModalMode] = useState(null);
@@ -53,7 +55,11 @@ export default function Categories() {
           const imageUrl = getCategoryImage(cat);
 
           return (
-            <div key={cat.id} className="item-card">
+            <div
+              key={cat.id}
+              className="item-card"
+              onClick={() => navigate(`/categories/${cat.id}/products`)}
+            >
               <div className="card-image-container">
                 {imageUrl ? (
                   <img src={imageUrl} alt={cat.name} className="card-image" />
@@ -71,7 +77,10 @@ export default function Categories() {
               <button
                 className="card-edit-button"
                 aria-label="Edit category"
-                onClick={() => setModalMode(cat)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setModalMode(cat);
+                }}
               >
                 &#9998;
               </button>
@@ -79,7 +88,10 @@ export default function Categories() {
               <button
                 className="card-delete-button"
                 aria-label="Delete category"
-                onClick={() => setDeletingCategory(cat)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setDeletingCategory(cat);
+                }}
               >
                 &#128465;
               </button>

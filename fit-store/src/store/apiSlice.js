@@ -48,6 +48,12 @@ export const fitstoreApi = createApi({
       providesTags: ['Category'],
     }),
 
+    // GET ALL PRODUCTS FOR A CATEGORY
+    getProductsByCategory: builder.query({
+      query: (categoryId) => `/products/getAllProducts/${categoryId}`,
+      providesTags: ['Products'],
+    }),
+
     // CREATE CATEGORY
     createCategory: builder.mutation({
       query: (category) => ({
@@ -82,6 +88,7 @@ export const fitstoreApi = createApi({
 export const {
   useLoginMutation,
   useGetProductsQuery,
+  useGetProductsByCategoryQuery,
   useGetCategoriesQuery,
   useCreateCategoryMutation,
   useUpdateCategoryMutation,

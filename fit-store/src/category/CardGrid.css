@@ -21,6 +21,7 @@
 /* Base Card Styling */
 .item-card {
   position: relative;
+  cursor: pointer;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   overflow: hidden;
