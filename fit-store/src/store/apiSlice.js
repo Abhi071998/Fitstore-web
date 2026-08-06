@@ -57,6 +57,25 @@ export const fitstoreApi = createApi({
       }),
       invalidatesTags: ['Category'],
     }),
+
+    // UPDATE CATEGORY
+    updateCategory: builder.mutation({
+      query: ({ id, ...category }) => ({
+        url: `/categories/updateCategory/${id}`,
+        method: 'PUT',
+        body: category,
+      }),
+      invalidatesTags: ['Category'],
+    }),
+
+    // DELETE CATEGORY
+    deleteCategory: builder.mutation({
+      query: (id) => ({
+        url: `/categories/deleteCategory/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Category'],
+    }),
   }),
 });
 
@@ -65,4 +84,6 @@ export const {
   useGetProductsQuery,
   useGetCategoriesQuery,
   useCreateCategoryMutation,
+  useUpdateCategoryMutation,
+  useDeleteCategoryMutation,
 } = fitstoreApi;

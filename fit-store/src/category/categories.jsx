@@ -1,11 +1,25 @@
 import React, { useState } from 'react';
-import { useGetCategoriesQuery } from '../store/apiSlice';
-import CreateCategoryModal from './CreateCategoryModal';
+import { useGetCategoriesQuery, useDeleteCategoryMutation } from '../store/apiSlice';
+import CategoryModal from './CategoryModal';
+import ConfirmDialog from './ConfirmDialog';
 import './CardGrid.css';
 
 export default function Categories() {
   const { data: categories, isLoading, isError, error } = useGetCategoriesQuery();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // null = closed, 'create' = add mode, category object = edit mode
+  const [modalMode, setModalMode] = useState(null);
+  // category object pending delete confirmation, or null
+  const [deletingCategory, setDeletingCategory] = useState(null);
+  const [deleteCategory, { isLoading: isDeleting }] = useDeleteCategoryMutation();
+
+  const handleConfirmDelete = async () => {
+    try {
+      await deleteCategory(deletingCategory.id).unwrap();
+      setDeletingCategory(null);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const getCategoryImage = (cat) => {
     if (cat.image_url) return cat.image_url;
@@ -53,6 +67,22 @@ export default function Categories() {
                   Products: {cat.products ? cat.products.length : 0}
                 </p>
               </div>
+
+              <button
+                className="card-edit-button"
+                aria-label="Edit category"
+                onClick={() => setModalMode(cat)}
+              >
+                &#9998;
+              </button>
+
+              <button
+                className="card-delete-button"
+                aria-label="Delete category"
+                onClick={() => setDeletingCategory(cat)}
+              >
+                &#128465;
+              </button>
             </div>
           );
         })}
@@ -61,13 +91,26 @@ export default function Categories() {
       <button
         className="fab-add-button"
         aria-label="Add category"
-        onClick={() => setIsModalOpen(true)}
+        onClick={() => setModalMode('create')}
       >
         +
       </button>
 
-      {isModalOpen && (
-        <CreateCategoryModal onClose={() => setIsModalOpen(false)} />
+      {modalMode && (
+        <CategoryModal
+          category={modalMode === 'create' ? null : modalMode}
+          onClose={() => setModalMode(null)}
+        />
+      )}
+
+      {deletingCategory && (
+        <ConfirmDialog
+          title="Delete Category"
+          message={`Are you sure you want to delete "${deletingCategory.name}"? This cannot be undone.`}
+          onConfirm={handleConfirmDelete}
+          onCancel={() => setDeletingCategory(null)}
+          isLoading={isDeleting}
+        />
       )}
     </div>
   );

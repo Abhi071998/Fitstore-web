@@ -1,16 +1,27 @@
 import React, { useState } from 'react';
-import { useCreateCategoryMutation } from '../store/apiSlice';
-import './CreateCategoryModal.css';
+import { useCreateCategoryMutation, useUpdateCategoryMutation } from '../store/apiSlice';
+import './CategoryModal.css';
 
-export default function CreateCategoryModal({ onClose }) {
-  const [name, setName] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
-  const [createCategory, { isLoading, error }] = useCreateCategoryMutation();
+export default function CategoryModal({ category, onClose }) {
+  const isEditMode = Boolean(category);
+
+  const [name, setName] = useState(category?.name || '');
+  const [imageUrl, setImageUrl] = useState(category?.image_url || '');
+
+  const [createCategory, { isLoading: isCreating, error: createError }] = useCreateCategoryMutation();
+  const [updateCategory, { isLoading: isUpdating, error: updateError }] = useUpdateCategoryMutation();
+
+  const isLoading = isEditMode ? isUpdating : isCreating;
+  const error = isEditMode ? updateError : createError;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await createCategory({ name, image_url: imageUrl || undefined }).unwrap();
+      if (isEditMode) {
+        await updateCategory({ id: category.id, name, image_url: imageUrl || undefined }).unwrap();
+      } else {
+        await createCategory({ name, image_url: imageUrl || undefined }).unwrap();
+      }
       onClose();
     } catch (err) {
       console.log(err);
@@ -25,7 +36,7 @@ export default function CreateCategoryModal({ onClose }) {
     <div className="modal-overlay" onClick={handleOverlayClick}>
       <div className="modal-dialog">
         <div className="modal-header">
-          <h3>Add Category</h3>
+          <h3>{isEditMode ? 'Edit Category' : 'Add Category'}</h3>
           <button type="button" className="modal-close" aria-label="Close" onClick={onClose}>
             &times;
           </button>
@@ -33,7 +44,7 @@ export default function CreateCategoryModal({ onClose }) {
 
         <form onSubmit={handleSubmit} className="modal-form">
           {error && (
-            <p className="modal-error">{error?.data?.message || 'Failed to create category'}</p>
+            <p className="modal-error">{error?.data?.message || error?.data?.error || 'Something went wrong'}</p>
           )}
 
           <div className="modal-field">
@@ -61,7 +72,7 @@ export default function CreateCategoryModal({ onClose }) {
               Cancel
             </button>
             <button type="submit" className="modal-btn-primary" disabled={isLoading}>
-              {isLoading ? 'Creating...' : 'Create'}
+              {isLoading ? 'Saving...' : isEditMode ? 'Save' : 'Create'}
             </button>
           </div>
         </form>
