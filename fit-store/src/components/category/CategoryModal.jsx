@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useCreateCategoryMutation, useUpdateCategoryMutation } from '../store/apiSlice';
+import { useCreateCategoryMutation, useUpdateCategoryMutation } from '../../store/apiSlice';
 import './CategoryModal.css';
 
 export default function CategoryModal({ category, onClose }) {

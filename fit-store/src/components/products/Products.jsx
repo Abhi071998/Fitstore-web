@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useGetProductsByCategoryQuery } from '../store/apiSlice';
+import { useGetProductsByCategoryQuery } from '../../store/apiSlice';
 import './Products.css';
 
 export default function Products() {

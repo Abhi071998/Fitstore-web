@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useGetCategoriesQuery, useDeleteCategoryMutation } from '../store/apiSlice';
+import { useGetCategoriesQuery, useDeleteCategoryMutation } from '../../store/apiSlice';
 import CategoryModal from './CategoryModal';
 import ConfirmDialog from './ConfirmDialog';
 import './CardGrid.css';

@@ -1,9 +1,9 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import Home from "./home/Home";
-import Navbar from "./common/components/Navbar";
-import Login from "./loginAuth/Login";
-import Categories from "./category/categories";
-import Products from "./products/Products";
+import Home from "./components/home/Home";
+import Navbar from "./components/common/components/Navbar";
+import Login from "./components/loginAuth/Login";
+import Categories from "./components/category/categories";
+import Products from "./components/products/Products";
 
 function App() {
   return (
