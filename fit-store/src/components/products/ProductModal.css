@@ -76,11 +76,13 @@
 
 .modal-field input,
 .modal-field textarea {
+  width: 100%;
   padding: 8px 12px;
   border: 1px solid #d1d5db;
   border-radius: 8px;
   font-size: 14px;
   font-family: inherit;
+  box-sizing: border-box;
 }
 
 .modal-field input:focus,
@@ -101,6 +103,13 @@
 
 .modal-row .modal-field {
   flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 480px) {
+  .modal-row {
+    flex-direction: column;
+  }
 }
 
 .size-stock-grid {
