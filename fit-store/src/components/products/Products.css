@@ -21,6 +21,7 @@
 
 /* Base Card Styling */
 .item-card {
+  cursor: pointer;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   overflow: hidden;
@@ -113,31 +114,4 @@
 
 .grid-status.error {
   color: #dc2626;
-}
-
-/* Floating Add Button */
-.fab-add-button {
-  position: fixed;
-  bottom: 32px;
-  right: 32px;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  border: none;
-  background-color: #059669;
-  color: #ffffff;
-  font-size: 28px;
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-}
-
-.fab-add-button:hover {
-  background-color: #047857;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
 }

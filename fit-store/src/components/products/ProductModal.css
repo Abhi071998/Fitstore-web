@@ -135,13 +135,24 @@
 }
 
 .modal-btn-secondary,
-.modal-btn-primary {
+.modal-btn-primary,
+.modal-btn-danger {
   padding: 8px 16px;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   border: none;
+}
+
+.modal-btn-danger {
+  background-color: #fef2f2;
+  color: #dc2626;
+  margin-right: auto;
+}
+
+.modal-btn-danger:hover {
+  background-color: #fee2e2;
 }
 
 .modal-btn-secondary {

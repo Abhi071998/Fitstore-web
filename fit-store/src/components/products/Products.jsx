@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetProductsByCategoryQuery } from '../../store/apiSlice';
-import CreateProductModal from './CreateProductModal';
+import ProductModal from './ProductModal';
+import FabButton from '../common/components/FabButton';
 import './Products.css';
 
 export default function Products() {
   const { categoryId } = useParams();
   const { data: products, isLoading, isError, error } = useGetProductsByCategoryQuery(categoryId);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // null = closed, 'create' = add mode, product object = edit mode
+  const [modalMode, setModalMode] = useState(null);
 
   const getProductImage = (product) => {
     if (!product.images) return null;
@@ -34,7 +36,11 @@ export default function Products() {
             const imageUrl = getProductImage(product);
 
             return (
-              <div key={product.id} className="item-card">
+              <div
+                key={product.id}
+                className="item-card"
+                onClick={() => setModalMode(product)}
+              >
                 <div className="card-image-container">
                   {imageUrl ? (
                     <img src={imageUrl} alt={product.name} className="card-image" />
@@ -61,16 +67,14 @@ export default function Products() {
         </div>
       )}
 
-      <button
-        className="fab-add-button"
-        aria-label="Add product"
-        onClick={() => setIsModalOpen(true)}
-      >
-        +
-      </button>
+      <FabButton ariaLabel="Add product" onClick={() => setModalMode('create')} />
 
-      {isModalOpen && (
-        <CreateProductModal categoryId={categoryId} onClose={() => setIsModalOpen(false)} />
+      {modalMode && (
+        <ProductModal
+          product={modalMode === 'create' ? null : modalMode}
+          categoryId={categoryId}
+          onClose={() => setModalMode(null)}
+        />
       )}
     </div>
   );

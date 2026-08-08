@@ -1,24 +1,73 @@
 import React, { useState } from 'react';
-import { useCreateProductMutation } from '../../store/apiSlice';
-import './CreateProductModal.css';
+import { useCreateProductMutation, useUpdateProductMutation, useDeleteProductMutation } from '../../store/apiSlice';
+import ConfirmDialog from '../common/components/ConfirmDialog';
+import './ProductModal.css';
 
 const SIZE_OPTIONS = ['S', 'M', 'L', 'XL', 'XXL'];
 
-export default function CreateProductModal({ categoryId, onClose }) {
-  const [name, setName] = useState('');
-  const [brand, setBrand] = useState('');
-  const [productCode, setProductCode] = useState('');
-  const [sku, setSku] = useState('');
-  const [description, setDescription] = useState('');
-  const [mrp, setMrp] = useState('');
-  const [sellingPrice, setSellingPrice] = useState('');
-  const [imagesText, setImagesText] = useState('');
-  const [specificationsText, setSpecificationsText] = useState('');
-  const [sizeStock, setSizeStock] = useState(
-    SIZE_OPTIONS.reduce((acc, size) => ({ ...acc, [size]: '' }), {})
-  );
+const imagesToText = (images) => {
+  if (!images) return '';
+  try {
+    const parsed = typeof images === 'string' ? JSON.parse(images) : images;
+    return Array.isArray(parsed) ? parsed.join('\n') : '';
+  } catch {
+    return '';
+  }
+};
 
-  const [createProduct, { isLoading, error }] = useCreateProductMutation();
+const specificationsToText = (specifications) => {
+  if (!specifications) return '';
+  try {
+    const parsed = typeof specifications === 'string' ? JSON.parse(specifications) : specifications;
+    return Object.entries(parsed)
+      .map(([key, value]) => `${key}: ${value}`)
+      .join('\n');
+  } catch {
+    return '';
+  }
+};
+
+const sizesToStockMap = (sizes) => {
+  const map = SIZE_OPTIONS.reduce((acc, size) => ({ ...acc, [size]: '' }), {});
+  if (Array.isArray(sizes)) {
+    sizes.forEach(({ size, stock }) => {
+      if (map[size] !== undefined) map[size] = String(stock ?? '');
+    });
+  }
+  return map;
+};
+
+export default function ProductModal({ product, categoryId, onClose }) {
+  const isEditMode = Boolean(product);
+
+  const [name, setName] = useState(product?.name || '');
+  const [brand, setBrand] = useState(product?.brand || '');
+  const [productCode, setProductCode] = useState(product?.product_code || '');
+  const [sku, setSku] = useState(product?.sku || '');
+  const [description, setDescription] = useState(product?.description || '');
+  const [mrp, setMrp] = useState(product?.mrp ?? '');
+  const [sellingPrice, setSellingPrice] = useState(product?.selling_price ?? '');
+  const [imagesText, setImagesText] = useState(imagesToText(product?.images));
+  const [specificationsText, setSpecificationsText] = useState(specificationsToText(product?.specifications));
+  const [sizeStock, setSizeStock] = useState(sizesToStockMap(product?.sizes));
+
+  const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
+
+  const [createProduct, { isLoading: isCreating, error: createError }] = useCreateProductMutation();
+  const [updateProduct, { isLoading: isUpdating, error: updateError }] = useUpdateProductMutation();
+  const [deleteProduct, { isLoading: isDeleting }] = useDeleteProductMutation();
+
+  const isLoading = isEditMode ? isUpdating : isCreating;
+  const error = isEditMode ? updateError : createError;
+
+  const handleConfirmDelete = async () => {
+    try {
+      await deleteProduct(product.id).unwrap();
+      onClose();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleSizeStockChange = (size, value) => {
     setSizeStock((prev) => ({ ...prev, [size]: value }));
@@ -54,20 +103,26 @@ export default function CreateProductModal({ categoryId, onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const payload = {
+      name,
+      brand: brand || undefined,
+      description: description || undefined,
+      product_code: productCode,
+      sku,
+      mrp: mrp === '' ? 0 : Number(mrp),
+      selling_price: sellingPrice === '' ? 0 : Number(sellingPrice),
+      category_id: Number(categoryId),
+      images: parseImages(),
+      specifications: parseSpecifications(),
+      sizes: parseSizes(),
+    };
+
     try {
-      await createProduct({
-        name,
-        brand: brand || undefined,
-        description: description || undefined,
-        product_code: productCode,
-        sku,
-        mrp: mrp === '' ? 0 : Number(mrp),
-        selling_price: sellingPrice === '' ? 0 : Number(sellingPrice),
-        category_id: Number(categoryId),
-        images: parseImages(),
-        specifications: parseSpecifications(),
-        sizes: parseSizes(),
-      }).unwrap();
+      if (isEditMode) {
+        await updateProduct({ id: product.id, ...payload }).unwrap();
+      } else {
+        await createProduct(payload).unwrap();
+      }
       onClose();
     } catch (err) {
       console.log(err);
@@ -82,7 +137,7 @@ export default function CreateProductModal({ categoryId, onClose }) {
     <div className="modal-overlay" onClick={handleOverlayClick}>
       <div className="modal-dialog">
         <div className="modal-header">
-          <h3>Add Product</h3>
+          <h3>{isEditMode ? 'Edit Product' : 'Add Product'}</h3>
           <button type="button" className="modal-close" aria-label="Close" onClick={onClose}>
             &times;
           </button>
@@ -91,7 +146,7 @@ export default function CreateProductModal({ categoryId, onClose }) {
         <form onSubmit={handleSubmit} className="modal-form">
           {error && (
             <p className="modal-error">
-              {error?.data?.message || error?.data?.error || 'Failed to create product'}
+              {error?.data?.message || error?.data?.error || 'Something went wrong'}
             </p>
           )}
 
@@ -201,15 +256,34 @@ export default function CreateProductModal({ categoryId, onClose }) {
           </div>
 
           <div className="modal-actions">
+            {isEditMode && (
+              <button
+                type="button"
+                className="modal-btn-danger"
+                onClick={() => setIsConfirmingDelete(true)}
+              >
+                Delete
+              </button>
+            )}
             <button type="button" className="modal-btn-secondary" onClick={onClose}>
               Cancel
             </button>
             <button type="submit" className="modal-btn-primary" disabled={isLoading}>
-              {isLoading ? 'Creating...' : 'Create'}
+              {isLoading ? 'Saving...' : isEditMode ? 'Update' : 'Create'}
             </button>
           </div>
         </form>
       </div>
+
+      {isConfirmingDelete && (
+        <ConfirmDialog
+          title="Delete Product"
+          message={`Are you sure you want to delete "${product?.name}"? This cannot be undone.`}
+          onConfirm={handleConfirmDelete}
+          onCancel={() => setIsConfirmingDelete(false)}
+          isLoading={isDeleting}
+        />
+      )}
     </div>
   );
 }

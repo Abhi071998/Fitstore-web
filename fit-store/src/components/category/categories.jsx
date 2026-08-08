@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGetCategoriesQuery, useDeleteCategoryMutation } from '../../store/apiSlice';
 import CategoryModal from './CategoryModal';
-import ConfirmDialog from './ConfirmDialog';
+import ConfirmDialog from '../common/components/ConfirmDialog';
+import FabButton from '../common/components/FabButton';
 import './CardGrid.css';
 
 export default function Categories() {
@@ -44,69 +45,66 @@ export default function Categories() {
 
   if (isLoading) return <div className="grid-status">Loading...</div>;
   if (isError) return <div className="grid-status error">Error: {error?.data?.message || 'Failed to load'}</div>;
-  if (!categories || categories.length === 0) return <div className="grid-status">No categories found.</div>;
 
   return (
     <div className="card-grid-container">
       <h2 className="card-grid-title">Categories</h2>
-      
-      <div className="card-grid">
-        {categories.map((cat) => {
-          const imageUrl = getCategoryImage(cat);
 
-          return (
-            <div
-              key={cat.id}
-              className="item-card"
-              onClick={() => navigate(`/categories/${cat.id}/products`)}
-            >
-              <div className="card-image-container">
-                {imageUrl ? (
-                  <img src={imageUrl} alt={cat.name} className="card-image" />
-                ) : (
-                  <div className="card-no-image">No Image</div>
-                )}
-              </div>
-              <div className="card-content">
-                <h3 className="card-title">{cat.name}</h3>
-                <p className="card-subtitle">
-                  Products: {cat.products ? cat.products.length : 0}
-                </p>
-              </div>
+      {!categories || categories.length === 0 ? (
+        <div className="grid-status">No categories found.</div>
+      ) : (
+        <div className="card-grid">
+          {categories.map((cat) => {
+            const imageUrl = getCategoryImage(cat);
 
-              <button
-                className="card-edit-button"
-                aria-label="Edit category"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setModalMode(cat);
-                }}
+            return (
+              <div
+                key={cat.id}
+                className="item-card"
+                onClick={() => navigate(`/categories/${cat.id}/products`)}
               >
-                &#9998;
-              </button>
+                <div className="card-image-container">
+                  {imageUrl ? (
+                    <img src={imageUrl} alt={cat.name} className="card-image" />
+                  ) : (
+                    <div className="card-no-image">No Image</div>
+                  )}
+                </div>
+                <div className="card-content">
+                  <h3 className="card-title">{cat.name}</h3>
+                  <p className="card-subtitle">
+                    Products: {cat.products ? cat.products.length : 0}
+                  </p>
+                </div>
 
-              <button
-                className="card-delete-button"
-                aria-label="Delete category"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setDeletingCategory(cat);
-                }}
-              >
-                &#128465;
-              </button>
-            </div>
-          );
-        })}
-      </div>
+                <button
+                  className="card-edit-button"
+                  aria-label="Edit category"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setModalMode(cat);
+                  }}
+                >
+                  &#9998;
+                </button>
 
-      <button
-        className="fab-add-button"
-        aria-label="Add category"
-        onClick={() => setModalMode('create')}
-      >
-        +
-      </button>
+                <button
+                  className="card-delete-button"
+                  aria-label="Delete category"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setDeletingCategory(cat);
+                  }}
+                >
+                  &#128465;
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      <FabButton ariaLabel="Add category" onClick={() => setModalMode('create')} />
 
       {modalMode && (
         <CategoryModal
