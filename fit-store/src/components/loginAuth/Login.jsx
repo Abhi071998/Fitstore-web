@@ -3,6 +3,7 @@ import { useLoginMutation } from "../../store/apiSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setCredentials, logout } from "../../store/authSlice";
 import { useNavigate } from "react-router-dom";
+import "./Login.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -26,46 +27,58 @@ export default function Login() {
   const handleLogout = () => {
     dispatch(logout()); // Clears store and localStorage
   };
+
   if (isAuthenticated) {
     return (
-      <div style={{ textAlign: "center", padding: "20px" }}>
-        <h2>Welcome, {user?.email || "User"}!</h2>
-        <p>You are currently logged in.</p>
-        <button onClick={handleLogout}>Logout</button>
+      <div className="login-page">
+        <div className="login-glass-card login-welcome-card">
+          <h2>Welcome, {user?.email || "User"}!</h2>
+          <p>You are currently logged in.</p>
+          <button className="login-btn" onClick={handleLogout}>
+            Logout
+          </button>
+        </div>
       </div>
     );
   }
+
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>FITstore Admin Login</h2>
+    <div className="login-page">
+      <form className="login-glass-card" onSubmit={handleSubmit}>
+        <h2 className="login-title">FITstore Admin Login</h2>
 
-      {error && (
-        <p style={{ color: "red" }}>{error?.data?.message || "Login failed"}</p>
-      )}
+        {error && (
+          <p className="login-error">
+            {error?.data?.message || "Login failed"}
+          </p>
+        )}
 
-      <div>
-        <label>Email: </label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </div>
+        <div className="login-field">
+          <label>Email</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@example.com"
+            required
+          />
+        </div>
 
-      <div>
-        <label>Password: </label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </div>
+        <div className="login-field">
+          <label>Password</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="••••••••"
+            required
+          />
+        </div>
 
-      <button type="submit" disabled={isLoading}>
-        {isLoading ? "Logging in..." : "Login"}
-      </button>
-    </form>
+        <button className="login-btn" type="submit" disabled={isLoading}>
+          {isLoading ? "Logging in..." : "Login"}
+        </button>
+      </form>
+    </div>
   );
 }
