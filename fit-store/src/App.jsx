@@ -10,12 +10,14 @@ function App() {
     <BrowserRouter>
       <Navbar />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/categories" element={<Categories />} />
-        <Route path="/categories/:categoryId/products" element={<Products />} />
-      </Routes>
+      <div className="page-background">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/categories" element={<Categories />} />
+          <Route path="/categories/:categoryId/products" element={<Products />} />
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 }

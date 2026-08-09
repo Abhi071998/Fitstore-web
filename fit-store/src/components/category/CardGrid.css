@@ -9,7 +9,7 @@
   font-size: 24px;
   font-weight: 700;
   margin-bottom: 24px;
-  color: #1f2937;
+  color: var(--color-text-on-page-bg);
 }
 
 .card-grid {
@@ -22,10 +22,10 @@
 .item-card {
   position: relative;
   cursor: pointer;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--color-border);
   border-radius: 12px;
   overflow: hidden;
-  background-color: #ffffff;
+  background-color: var(--color-surface);
   box-shadow: 0 2px 4px rgba(39, 2, 2, 0.05);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
@@ -39,9 +39,9 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  border: 1px solid #e5e7eb;
-  background-color: #ffffff;
-  color: #374151;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  color: var(--color-text-secondary);
   font-size: 15px;
   display: flex;
   align-items: center;
@@ -52,9 +52,9 @@
 }
 
 .card-edit-button:hover {
-  background-color: #093ace;
-  color: #ffffff;
-  border-color: #0e08d0;
+  background-color: var(--color-primary);
+  color: var(--color-surface);
+  border-color: var(--color-primary);
 }
 
 .card-delete-button {
@@ -64,9 +64,9 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  border: 1px solid #e5e7eb;
-  background-color: #ffffff;
-  color: #374151;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  color: var(--color-text-secondary);
   font-size: 14px;
   display: flex;
   align-items: center;
@@ -77,9 +77,9 @@
 }
 
 .card-delete-button:hover {
-  background-color: #dc2626;
-  color: #ffffff;
-  border-color: #dc2626;
+  background-color: var(--color-danger);
+  color: var(--color-surface);
+  border-color: var(--color-danger);
 }
 
 .item-card:hover {
@@ -91,12 +91,12 @@
 .card-image-container {
   width: 100%;
   height: 180px;
-  background-color: #f9fafb;
+  background-color: var(--color-surface-muted);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 1px solid var(--color-surface-muted);
 }
 
 .card-image {
@@ -106,7 +106,7 @@
 }
 
 .card-no-image {
-  color: #9ca3af;
+  color: var(--color-text-faint);
   font-size: 14px;
 }
 
@@ -122,20 +122,20 @@
   font-size: 16px;
   font-weight: 600;
   margin: 0;
-  color: #111827;
+  color: var(--color-text);
   text-transform: capitalize;
 }
 
 .card-subtitle {
   font-size: 14px;
-  color: #6b7280;
+  color: var(--color-text-muted);
   margin: 0;
 }
 
 .card-price {
   font-size: 16px;
   font-weight: 700;
-  color: #059669;
+  color: var(--color-success);
   margin: 0;
 }
 
@@ -143,8 +143,9 @@
 .grid-status {
   padding: 24px;
   font-size: 16px;
+  color: var(--color-text-on-page-bg);
 }
 
 .grid-status.error {
-  color: #dc2626;
+  color: var(--color-danger-on-page-bg);
 }

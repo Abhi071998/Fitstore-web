@@ -9,7 +9,7 @@
   font-size: 24px;
   font-weight: 700;
   margin-bottom: 24px;
-  color: #1f2937;
+  color: var(--color-text-on-page-bg);
   text-transform: capitalize;
 }
 
@@ -22,10 +22,10 @@
 /* Base Card Styling */
 .item-card {
   cursor: pointer;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--color-border);
   border-radius: 12px;
   overflow: hidden;
-  background-color: #ffffff;
+  background-color: var(--color-surface);
   box-shadow: 0 2px 4px rgba(39, 2, 2, 0.05);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
@@ -41,12 +41,12 @@
 .card-image-container {
   width: 100%;
   height: 180px;
-  background-color: #f9fafb;
+  background-color: var(--color-surface-muted);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 1px solid var(--color-surface-muted);
 }
 
 .card-image {
@@ -56,7 +56,7 @@
 }
 
 .card-no-image {
-  color: #9ca3af;
+  color: var(--color-text-faint);
   font-size: 14px;
 }
 
@@ -72,12 +72,12 @@
   font-size: 16px;
   font-weight: 600;
   margin: 0;
-  color: #111827;
+  color: var(--color-text);
 }
 
 .card-subtitle {
   font-size: 14px;
-  color: #6b7280;
+  color: var(--color-text-muted);
   margin: 0;
 }
 
@@ -91,27 +91,28 @@
 .card-price {
   font-size: 16px;
   font-weight: 700;
-  color: #059669;
+  color: var(--color-success);
 }
 
 .card-mrp {
   font-size: 13px;
-  color: #9ca3af;
+  color: var(--color-text-faint);
   text-decoration: line-through;
 }
 
 .card-discount {
   font-size: 12px;
   font-weight: 600;
-  color: #dc2626;
+  color: var(--color-danger);
 }
 
 /* Global Status Message States */
 .grid-status {
   padding: 24px;
   font-size: 16px;
+  color: var(--color-text-on-page-bg);
 }
 
 .grid-status.error {
-  color: #dc2626;
+  color: var(--color-danger-on-page-bg);
 }

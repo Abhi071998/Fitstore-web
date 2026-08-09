@@ -1,7 +1,7 @@
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--color-overlay);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,11 +9,11 @@
 }
 
 .modal-dialog {
-  background-color: #ffffff;
+  background-color: var(--color-surface);
   border-radius: 12px;
   width: 100%;
   max-width: 420px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 30px var(--shadow-color);
   overflow: hidden;
 }
 
@@ -22,14 +22,14 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px 20px;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .modal-header h3 {
   margin: 0;
   font-size: 18px;
   font-weight: 700;
-  color: #111827;
+  color: var(--color-text);
 }
 
 .modal-close {
@@ -38,11 +38,11 @@
   font-size: 22px;
   line-height: 1;
   cursor: pointer;
-  color: #6b7280;
+  color: var(--color-text-muted);
 }
 
 .modal-close:hover {
-  color: #111827;
+  color: var(--color-text);
 }
 
 .modal-form {
@@ -61,23 +61,23 @@
 .modal-field label {
   font-size: 14px;
   font-weight: 600;
-  color: #374151;
+  color: var(--color-text-secondary);
 }
 
 .modal-field input {
   padding: 8px 12px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--color-border-input);
   border-radius: 8px;
   font-size: 14px;
 }
 
 .modal-field input:focus {
   outline: none;
-  border-color: #059669;
+  border-color: var(--color-primary);
 }
 
 .modal-error {
-  color: #dc2626;
+  color: var(--color-danger);
   font-size: 14px;
   margin: 0;
 }
@@ -100,21 +100,21 @@
 }
 
 .modal-btn-secondary {
-  background-color: #f3f4f6;
-  color: #374151;
+  background-color: var(--color-surface-muted);
+  color: var(--color-text-secondary);
 }
 
 .modal-btn-secondary:hover {
-  background-color: #e5e7eb;
+  background-color: var(--color-border);
 }
 
 .modal-btn-primary {
-  background-color: #0d10c8;
-  color: #ffffff;
+  background-color: var(--color-primary);
+  color: var(--color-surface);
 }
 
 .modal-btn-primary:hover {
-  background-color: #0b1ac0;
+  background-color: var(--color-primary-hover);
 }
 
 .modal-btn-primary:disabled {

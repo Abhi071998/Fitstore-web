@@ -1,0 +1,17 @@
+.home-page {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.home-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--color-text-on-page-bg);
+  margin: 0;
+}
+
+.home-subtitle {
+  margin-top: 0.5rem;
+  color: var(--color-text-on-page-bg-muted);
+}
