@@ -4,6 +4,7 @@ import Navbar from "./components/common/components/Navbar";
 import Login from "./components/loginAuth/Login";
 import Categories from "./components/category/categories";
 import Products from "./components/products/Products";
+import PendingApprovals from "./components/orders/PendingApprovals";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/categories" element={<Categories />} />
           <Route path="/categories/:categoryId/products" element={<Products />} />
+          <Route path="/orders/pending" element={<PendingApprovals />} />
         </Routes>
       </div>
     </BrowserRouter>

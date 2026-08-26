@@ -1,0 +1,198 @@
+.orders-page {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.orders-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.orders-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text-on-page-bg);
+  margin: 0;
+}
+
+.orders-bulk-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background-color: var(--color-surface);
+  padding: 8px 14px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.orders-bulk-result {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  background-color: var(--color-surface);
+  padding: 10px 16px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+.orders-group {
+  margin-bottom: 28px;
+}
+
+.orders-group-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-on-page-bg);
+  margin: 0 0 12px;
+}
+
+.orders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.order-select {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+/* Order Card */
+.order-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 2px 4px rgba(39, 2, 2, 0.05);
+}
+
+.order-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.order-status {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: var(--color-text-muted);
+  background-color: var(--color-surface-muted);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.order-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.order-items {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.order-total {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-success);
+}
+
+.order-admin-comment {
+  font-size: 12px;
+  font-style: italic;
+  color: var(--color-text-faint);
+  margin: 0;
+}
+
+.order-error {
+  color: var(--color-danger);
+  font-size: 13px;
+  margin: 0;
+}
+
+.order-comment {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border: 1px solid var(--color-border-input);
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.order-comment:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.order-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.order-btn-approve,
+.order-btn-reject {
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.order-btn-approve {
+  background-color: var(--color-success);
+  color: var(--color-surface);
+}
+
+.order-btn-approve:hover:not(:disabled) {
+  background-color: var(--color-success-hover);
+}
+
+.order-btn-reject {
+  background-color: var(--color-danger-bg);
+  color: var(--color-danger);
+}
+
+.order-btn-reject:hover:not(:disabled) {
+  background-color: var(--color-danger-bg-hover);
+}
+
+.order-btn-approve:disabled,
+.order-btn-reject:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.grid-status {
+  padding: 24px;
+  font-size: 16px;
+  color: var(--color-text-on-page-bg);
+}
+
+.grid-status.error {
+  color: var(--color-danger-on-page-bg);
+}
