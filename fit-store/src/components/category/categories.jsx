@@ -65,7 +65,13 @@ export default function Categories() {
               >
                 <div className="card-image-container">
                   {imageUrl ? (
-                    <img src={imageUrl} alt={cat.name} className="card-image" />
+                    <img
+                      src={imageUrl}
+                      alt={cat.name}
+                      className="card-image"
+                      loading="lazy"
+                      decoding="async"
+                    />
                   ) : (
                     <div className="card-no-image">No Image</div>
                   )}

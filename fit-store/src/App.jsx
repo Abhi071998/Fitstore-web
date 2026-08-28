@@ -5,6 +5,7 @@ import Login from "./components/loginAuth/Login";
 import Categories from "./components/category/categories";
 import Products from "./components/products/Products";
 import PendingApprovals from "./components/orders/PendingApprovals";
+import AdminConsole from "./components/adminConsole/AdminConsole";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/categories" element={<Categories />} />
           <Route path="/categories/:categoryId/products" element={<Products />} />
           <Route path="/orders/pending" element={<PendingApprovals />} />
+          <Route path="/admin-console" element={<AdminConsole />} />
         </Routes>
       </div>
     </BrowserRouter>

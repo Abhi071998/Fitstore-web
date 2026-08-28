@@ -1,0 +1,125 @@
+.admin-console-page {
+  padding: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.admin-console-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text-on-page-bg);
+  margin-bottom: 20px;
+}
+
+.admin-console-section {
+  margin-bottom: 28px;
+}
+
+.admin-console-section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-on-page-bg);
+  margin: 0 0 12px;
+}
+
+.admin-console-form {
+  background-color: var(--color-surface);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.admin-console-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-console-field label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.admin-console-field input,
+.admin-console-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border-input);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.admin-console-field input:focus,
+.admin-console-field textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.admin-console-row {
+  display: flex;
+  gap: 16px;
+}
+
+.admin-console-row .admin-console-field {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 480px) {
+  .admin-console-row {
+    flex-direction: column;
+  }
+}
+
+.admin-console-error {
+  color: var(--color-danger);
+  font-size: 14px;
+  margin: 0;
+}
+
+.admin-console-success {
+  color: var(--color-success);
+  font-size: 14px;
+  margin: 0;
+}
+
+.admin-console-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.admin-console-btn-primary {
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  background-color: var(--color-primary);
+  color: var(--color-surface);
+}
+
+.admin-console-btn-primary:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+}
+
+.admin-console-btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.grid-status {
+  padding: 24px;
+  font-size: 16px;
+  color: var(--color-text-on-page-bg);
+}
+
+.grid-status.error {
+  color: var(--color-danger-on-page-bg);
+}

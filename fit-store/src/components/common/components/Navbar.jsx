@@ -28,7 +28,9 @@ function Navbar() {
         <ul className="navbar-links">
           <li><Link to="/" className="nav-link">Home</Link></li>
           <li><Link to="/categories" className="nav-link">Categories</Link></li>
-          <li><Link to="/about" className="nav-link">About</Link></li>
+          {isAuthenticated && (
+            <li><Link to="/admin-console" className="nav-link">Admin Console</Link></li>
+          )}
         </ul>
 
         {/* Action Button */}
@@ -59,11 +61,15 @@ function Navbar() {
           <Link to="/" className="nav-link" onClick={() => setIsOpen(false)}>Home</Link>
           <Link to="/categories" className="nav-link" onClick={() => setIsOpen(false)}>Categories</Link>
           <Link to="/products" className="nav-link" onClick={() => setIsOpen(false)}>Products</Link>
-          <Link to="/about" className="nav-link" onClick={() => setIsOpen(false)}>About</Link>
           {isAuthenticated && (
-            <Link to="/orders/pending" className="nav-link" onClick={() => setIsOpen(false)}>
-              Pending Approvals{pendingCount > 0 ? ` (${pendingCount})` : ''}
-            </Link>
+            <>
+              <Link to="/orders/pending" className="nav-link" onClick={() => setIsOpen(false)}>
+                Pending Approvals{pendingCount > 0 ? ` (${pendingCount})` : ''}
+              </Link>
+              <Link to="/admin-console" className="nav-link" onClick={() => setIsOpen(false)}>
+                Admin Console
+              </Link>
+            </>
           )}
           <Link to="/login" className="btn-login" onClick={() => setIsOpen(false)}>Login</Link>
         </div>

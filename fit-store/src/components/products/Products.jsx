@@ -43,7 +43,13 @@ export default function Products() {
               >
                 <div className="card-image-container">
                   {imageUrl ? (
-                    <img src={imageUrl} alt={product.name} className="card-image" />
+                    <img
+                      src={imageUrl}
+                      alt={product.name}
+                      className="card-image"
+                      loading="lazy"
+                      decoding="async"
+                    />
                   ) : (
                     <div className="card-no-image">No Image</div>
                   )}
