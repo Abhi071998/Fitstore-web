@@ -1,13 +1,22 @@
 import React, { useState } from 'react';
-import { useCreateCategoryMutation, useUpdateCategoryMutation } from '../../store/apiSlice';
+import {
+  useCreateCategoryMutation,
+  useUpdateCategoryMutation,
+  useGetCategoryTypesQuery,
+} from '../../store/apiSlice';
 import './CategoryModal.css';
+
+const getCategoryTypeLabel = (type) => type.name || type.type_name || type.title || `Type #${type.id}`;
 
 export default function CategoryModal({ category, onClose }) {
   const isEditMode = Boolean(category);
 
-  const [name, setName] = useState(category?.name || '');
   const [imageUrl, setImageUrl] = useState(category?.image_url || '');
+  const [categoryTypeId, setCategoryTypeId] = useState(
+    category?.category_type_id != null ? String(category.category_type_id) : ''
+  );
 
+  const { data: categoryTypes } = useGetCategoryTypesQuery();
   const [createCategory, { isLoading: isCreating, error: createError }] = useCreateCategoryMutation();
   const [updateCategory, { isLoading: isUpdating, error: updateError }] = useUpdateCategoryMutation();
 
@@ -16,11 +25,17 @@ export default function CategoryModal({ category, onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const selectedType = (categoryTypes || []).find((t) => String(t.id) === categoryTypeId);
+    const payload = {
+      name: selectedType ? getCategoryTypeLabel(selectedType) : '',
+      image_url: imageUrl || undefined,
+      category_type_id: categoryTypeId ? Number(categoryTypeId) : undefined,
+    };
     try {
       if (isEditMode) {
-        await updateCategory({ id: category.id, name, image_url: imageUrl || undefined }).unwrap();
+        await updateCategory({ id: category.id, ...payload }).unwrap();
       } else {
-        await createCategory({ name, image_url: imageUrl || undefined }).unwrap();
+        await createCategory(payload).unwrap();
       }
       onClose();
     } catch (err) {
@@ -48,13 +63,19 @@ export default function CategoryModal({ category, onClose }) {
           )}
 
           <div className="modal-field">
-            <label>Name</label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+            <label>Name<span className="required-mark">*</span></label>
+            <select
+              value={categoryTypeId}
+              onChange={(e) => setCategoryTypeId(e.target.value)}
               required
-            />
+            >
+              <option value="">Select a type</option>
+              {(categoryTypes || []).map((type) => (
+                <option key={type.id} value={type.id}>
+                  {getCategoryTypeLabel(type)}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="modal-field">

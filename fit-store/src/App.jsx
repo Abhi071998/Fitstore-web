@@ -6,6 +6,9 @@ import Categories from "./components/category/categories";
 import Products from "./components/products/Products";
 import PendingApprovals from "./components/orders/PendingApprovals";
 import AdminConsole from "./components/adminConsole/AdminConsole";
+import AdminConsoleHome from "./components/adminConsole/AdminConsoleHome";
+import AboutUsSection from "./components/adminConsole/sections/AboutUsSection";
+import CategoryTypesSection from "./components/adminConsole/sections/CategoryTypesSection";
 
 function App() {
   return (
@@ -19,7 +22,11 @@ function App() {
           <Route path="/categories" element={<Categories />} />
           <Route path="/categories/:categoryId/products" element={<Products />} />
           <Route path="/orders/pending" element={<PendingApprovals />} />
-          <Route path="/admin-console" element={<AdminConsole />} />
+          <Route path="/admin-console" element={<AdminConsole />}>
+            <Route index element={<AdminConsoleHome />} />
+            <Route path="about-us" element={<AboutUsSection />} />
+            <Route path="category-types" element={<CategoryTypesSection />} />
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>

@@ -64,14 +64,21 @@
   color: var(--color-text-secondary);
 }
 
-.modal-field input {
+.modal-field input,
+.modal-field select {
+  width: 100%;
+  box-sizing: border-box;
   padding: 8px 12px;
   border: 1px solid var(--color-border-input);
   border-radius: 8px;
   font-size: 14px;
+  font-family: inherit;
+  background-color: var(--color-surface);
+  color: var(--color-text);
 }
 
-.modal-field input:focus {
+.modal-field input:focus,
+.modal-field select:focus {
   outline: none;
   border-color: var(--color-primary);
 }
