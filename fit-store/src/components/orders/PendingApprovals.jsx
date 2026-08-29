@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useGetPendingOrdersQuery, useBulkApproveOrdersMutation } from '../../store/apiSlice';
+import { useGetPendingOrdersQuery, useBulkApproveOrdersMutation } from '../../store/api/ordersApi';
 import { normalizeOrderGroups } from './ordersUtils';
 import OrderCard from './OrderCard';
 import './PendingApprovals.css';

@@ -1,7 +1,7 @@
 import react, { useEffect, useRef, useState } from "react";
-import { useLoginMutation } from "../../store/apiSlice";
+import { useLoginMutation } from "../../store/api/authApi";
 import { useDispatch, useSelector } from "react-redux";
-import { setCredentials, logout } from "../../store/authSlice";
+import { setCredentials, logout } from "../../store/slices/authSlice";
 import { useNavigate } from "react-router-dom";
 import Toast from "../common/components/Toast";
 import "./Login.css";
@@ -51,7 +51,7 @@ export default function Login() {
         )}
         <div className="login-page">
           <div className="login-glass-card login-welcome-card">
-            <h2>Welcome, {user?.email || "User"}!</h2>
+            <h2>Welcome, {user?.name || user?.email || "User"}!</h2>
             <p>You are currently logged in.</p>
             <button className="login-btn" onClick={handleLogout}>
               Logout

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useGetPendingOrdersQuery } from '../../../store/apiSlice';
+import { useGetPendingOrdersQuery } from '../../../store/api/ordersApi';
 import { countPendingOrders } from '../../orders/ordersUtils';
 import "../common-style/Navbar.css";
 
@@ -60,7 +60,6 @@ function Navbar() {
         <div className="mobile-menu-links">
           <Link to="/" className="nav-link" onClick={() => setIsOpen(false)}>Home</Link>
           <Link to="/categories" className="nav-link" onClick={() => setIsOpen(false)}>Categories</Link>
-          <Link to="/products" className="nav-link" onClick={() => setIsOpen(false)}>Products</Link>
           {isAuthenticated && (
             <>
               <Link to="/orders/pending" className="nav-link" onClick={() => setIsOpen(false)}>

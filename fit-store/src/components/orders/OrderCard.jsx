@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useApproveOrderMutation, useRejectOrderMutation } from '../../store/apiSlice';
+import { useApproveOrderMutation, useRejectOrderMutation } from '../../store/api/ordersApi';
 import {
   getOrderItems,
   getItemLabel,

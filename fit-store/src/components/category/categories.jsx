@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useGetCategoriesQuery, useDeleteCategoryMutation } from '../../store/apiSlice';
+import { useGetCategoriesQuery, useDeleteCategoryMutation } from '../../store/api/categoriesApi';
 import CategoryModal from './CategoryModal';
 import ConfirmDialog from '../common/components/ConfirmDialog';
 import FabButton from '../common/components/FabButton';

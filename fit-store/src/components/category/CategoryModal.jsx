@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import {
   useCreateCategoryMutation,
   useUpdateCategoryMutation,
-  useGetCategoryTypesQuery,
-} from '../../store/apiSlice';
+} from '../../store/api/categoriesApi';
+import { useGetCategoryTypesQuery } from '../../store/api/categoryTypesApi';
 import './CategoryModal.css';
 
 const getCategoryTypeLabel = (type) => type.name || type.type_name || type.title || `Type #${type.id}`;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useGetProductsByCategoryQuery } from '../../store/apiSlice';
+import { useGetProductsByCategoryQuery } from '../../store/api/productsApi';
 import ProductModal from './ProductModal';
 import FabButton from '../common/components/FabButton';
 import './Products.css';

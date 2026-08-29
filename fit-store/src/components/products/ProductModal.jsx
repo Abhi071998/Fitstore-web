@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useCreateProductMutation, useUpdateProductMutation, useDeleteProductMutation } from '../../store/apiSlice';
+import { useCreateProductMutation, useUpdateProductMutation, useDeleteProductMutation } from '../../store/api/productsApi';
 import ConfirmDialog from '../common/components/ConfirmDialog';
 import './ProductModal.css';
 

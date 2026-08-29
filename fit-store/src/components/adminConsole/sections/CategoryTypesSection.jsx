@@ -4,7 +4,7 @@ import {
   useCreateCategoryTypeMutation,
   useUpdateCategoryTypeMutation,
   useDeleteCategoryTypeMutation,
-} from '../../../store/apiSlice';
+} from '../../../store/api/categoryTypesApi';
 import ConfirmDialog from '../../common/components/ConfirmDialog';
 import '../AdminConsole.css';
 

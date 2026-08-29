@@ -3,7 +3,7 @@ import {
   useGetAboutUsQuery,
   useCreateAboutUsMutation,
   useUpdateAboutUsMutation,
-} from '../../../store/apiSlice';
+} from '../../../store/api/contentApi';
 import '../AdminConsole.css';
 
 const emptyForm = {
