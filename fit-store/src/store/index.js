@@ -11,6 +11,7 @@ import './api/categoriesApi';
 import './api/categoryTypesApi';
 import './api/ordersApi';
 import './api/contentApi';
+import './api/heroApi';
 
 export const store = configureStore({
   reducer: {

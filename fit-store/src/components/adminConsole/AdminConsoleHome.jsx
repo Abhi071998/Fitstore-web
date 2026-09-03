@@ -2,6 +2,11 @@ import { Link } from 'react-router-dom';
 
 const sections = [
   {
+    to: 'hero',
+    title: 'Hero Banner',
+    description: 'Manage the homepage hero banner shown to customers.',
+  },
+  {
     to: 'about-us',
     title: 'About Us',
     description: 'Manage the About Us content shown to customers.',

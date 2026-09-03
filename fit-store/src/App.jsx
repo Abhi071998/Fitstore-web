@@ -9,6 +9,7 @@ import AdminConsole from "./components/adminConsole/AdminConsole";
 import AdminConsoleHome from "./components/adminConsole/AdminConsoleHome";
 import AboutUsSection from "./components/adminConsole/sections/AboutUsSection";
 import CategoryTypesSection from "./components/adminConsole/sections/CategoryTypesSection";
+import HeroSection from "./components/adminConsole/sections/HeroSection";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route index element={<AdminConsoleHome />} />
             <Route path="about-us" element={<AboutUsSection />} />
             <Route path="category-types" element={<CategoryTypesSection />} />
+            <Route path="hero" element={<HeroSection />} />
           </Route>
         </Routes>
       </div>
