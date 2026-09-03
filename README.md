@@ -18,7 +18,16 @@ The app runs at `http://localhost:5173` by default.
 Copy `.env.example` to `.env` and set the base URL of your backend API:
 
 ```bash
+# Local backend
 VITE_BASE_URL=http://localhost:8080/api
+
+# Deployed backend
+VITE_BASE_URL=https://fitstore-engine.onrender.com/api
 ```
 
 `VITE_BASE_URL` must be prefixed with `VITE_` so Vite exposes it to the client; it points to your Go Echo backend.
+
+## Backend
+
+The server-side (Go Echo + GORM + PostgreSQL) code for this project lives at
+[Fitstore-engine](https://github.com/Abhi071998/Fitstore-engine).
